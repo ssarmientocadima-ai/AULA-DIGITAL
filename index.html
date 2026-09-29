@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TU_NOMBRE | Ingeniero de Sistemas y Docente | App del Postulante</title>
+<meta name="description" content="Clases de Matemática, Física y Química, preparación para ESFM, UMSS, ANAPOL y COLMIL, y la App del Postulante.">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* COLORES: cámbialos aquí y toda la página se actualiza */
+:root{--fondo:#F2F6FB;--tinta:#0E1A2B;--texto:#3A4A5F;--acento:#2F5BFF;--suave:#E3EAFF;--mat:#2F5BFF;--fis:#12B58C;--qui:#E8990C;--linea:#D5DEEB;--blanco:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{font-family:"Source Sans 3",system-ui,Arial,sans-serif;background:var(--fondo);color:var(--texto);line-height:1.6;font-size:17px}
+h1,h2,h3{font-family:Sora,"Segoe UI",Arial,sans-serif;color:var(--tinta);line-height:1.2}
+h1{font-size:clamp(1.9rem,5vw,3.1rem)}
+h2{font-size:clamp(1.5rem,3.4vw,2.1rem);margin-bottom:.6rem}
+h3{font-size:1.1rem;margin-bottom:.3rem}
+section{padding:64px 20px}
+.wrap{max-width:1040px;margin:0 auto}
+.intro{max-width:60ch;margin-bottom:30px}
+a{color:var(--acento)}
+:focus-visible{outline:3px solid var(--acento);outline-offset:3px}
+.alt{background:var(--blanco)}
+
+/* Menú */
+nav{position:sticky;top:0;z-index:10;background:var(--tinta);padding:0 20px}
+nav .wrap{display:flex;align-items:center;gap:22px;height:56px;overflow-x:auto;white-space:nowrap}
+nav b{font-family:Sora,Arial,sans-serif;color:#fff;margin-right:auto}
+nav a{color:#C9D5E8;text-decoration:none;font-weight:600;font-size:.95rem}
+nav a:hover{color:#fff}
+
+/* Botones */
+.btn{display:inline-block;padding:13px 22px;border-radius:10px;font-weight:600;text-decoration:none;background:var(--acento);color:#fff;border:2px solid var(--acento)}
+.btn:hover{background:#1F45D6;border-color:#1F45D6}
+.btn.claro{background:transparent;color:var(--tinta);border-color:var(--tinta)}
+.btn.claro:hover{background:var(--tinta);color:#fff}
+.botones{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+
+/* Imágenes: si no cargan, se ve el recuadro de relleno */
+.img{position:relative;background:linear-gradient(135deg,var(--suave),#fff);border:1px dashed var(--acento);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--acento);font-weight:600;font-size:.85rem;overflow:hidden}
+.img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* Portada con cuadrícula de cuaderno */
+.hero{background-color:var(--tinta);background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:32px 32px;color:#C9D5E8;padding:76px 20px}
+.hero h1{color:#fff}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}
+.hero p{max-width:52ch;margin-top:16px;font-size:1.15rem}
+.hero .btn.claro{color:#fff;border-color:#fff}
+.hero .btn.claro:hover{background:#fff;color:var(--tinta)}
+.pildoras{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pildoras span{border:1px solid #3B4E6B;border-radius:99px;padding:3px 13px;font-size:.9rem;color:#fff}
+.telefono{width:min(260px,100%);aspect-ratio:9/18.5;margin:0 auto;border:9px solid #24344D;border-radius:34px;background:#24344D}
+.telefono .img{width:100%;height:100%;border-radius:24px;border:none}
+
+.grid{display:grid;gap:20px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+
+/* Tarjetas */
+.card{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:22px;display:flex;flex-direction:column}
+.alt .card{background:var(--fondo)}
+.card .tag{align-self:flex-start;background:var(--suave);color:var(--acento);font-weight:600;font-size:.82rem;padding:2px 10px;border-radius:99px;margin-bottom:10px}
+.card .tag.serv{background:#DDF6EE;color:#0B8A69}
+.card a.mas{margin-top:auto;padding-top:12px;font-weight:600}
+.materia{border-top:5px solid var(--c)}
+.materia ul{margin:8px 0 0 18px}
+.inst{border-top:4px solid var(--fis)}
+
+/* App */
+.app .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.lista{list-style:none;display:grid;gap:12px;margin-top:14px}
+.lista li{padding-left:16px;border-left:4px solid var(--acento)}
+.lista strong{color:var(--tinta)}
+.capturas{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.capturas .img{aspect-ratio:9/16;border-radius:14px}
+
+/* Sobre mí */
+.sobre .wrap{display:grid;grid-template-columns:220px 1fr;gap:36px;align-items:center}
+.foto{aspect-ratio:1;border-radius:50%}
+.enlaces{display:flex;flex-wrap:wrap;gap:16px;margin-top:14px}
+
+details{border-bottom:1px solid var(--linea);padding:14px 0;max-width:720px}
+summary{cursor:pointer;font-weight:600;color:var(--tinta)}
+details p{margin-top:8px}
+
+.contacto{background:var(--tinta);color:#C9D5E8;text-align:center}
+.contacto h2{color:#fff}
+.contacto p{max-width:52ch;margin:0 auto}
+.contacto .botones{justify-content:center}
+.contacto .btn.claro{color:#fff;border-color:#fff}
+.contacto .btn.claro:hover{background:#fff;color:var(--tinta)}
+footer{background:#08111F;color:#8FA1BA;text-align:center;padding:18px;font-size:.9rem}
+footer a{color:#8FA1BA}
+.wsp{position:fixed;right:16px;bottom:16px;z-index:20;background:#25D366;color:#fff;font-weight:700;text-decoration:none;padding:12px 18px;border-radius:99px;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+
+@media(max-width:800px){
+  section{padding:46px 18px}
+  .hero .wrap,.app .wrap,.sobre .wrap{grid-template-columns:1fr}
+  .foto{width:160px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- ============ MENÚ ============ -->
+<nav>
+  <div class="wrap">
+    <b>TU_NOMBRE</b>
+    <a href="#app">App</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#materias">Materias</a>
+    <a href="#instituciones">Instituciones</a>
+    <a href="#sobre">Sobre mí</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</nav>
+
+<!-- ============ PORTADA ============ -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Prepárate para ingresar con clases y una app hechas por tu profesor</h1>
+      <p>Soy TU_NOMBRE, ingeniero de sistemas y docente de Matemática, Física y Química. Te preparo para el ingreso a ESFM, UMSS, ANAPOL y COLMIL.</p>
+      <div class="pildoras"><span>Matemática</span><span>Física</span><span>Química</span><span>Apps y sistemas</span></div>
+      <div class="botones">
+        <a class="btn" href="#app">Conocer la App del Postulante</a>
+        <a class="btn claro" href="#contacto">Pedir información</a>
+      </div>
+    </div>
+    <div class="telefono">
+      <!-- IMAGEN: pantalla principal de la app (imagenes/captura1.png) -->
+      <div class="img">Captura principal
+        <img src="imagenes/captura1.png" alt="Pantalla principal de la App del Postulante" onerror="this.style.display='none'">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ PRODUCTOS Y SERVICIOS ============ -->
+<section id="servicios">
+  <div class="wrap">
+    <h2>Productos y servicios</h2>
+    <p class="intro">Todo lo que necesitas para preparar tu ingreso, en un solo lugar.</p>
+    <div class="grid g3">
+      <article class="card"><span class="tag">Producto</span><h3>App del Postulante</h3><p>Practica desde tu celular con preguntas y simulacros de examen.</p><a class="mas" href="#app">Ver la app</a></article>
+      <article class="card"><span class="tag serv">Servicio</span><h3>Clases de Matemática, Física y Química</h3><p>Clases claras, con ejercicios resueltos paso a paso.</p><a class="mas" href="#contacto">Consultar</a></article>
+      <article class="card"><span class="tag serv">Servicio</span><h3>Preparación por institución</h3><p>Cursos enfocados en el examen de ESFM, UMSS, ANAPOL o COLMIL.</p><a class="mas" href="#instituciones">Elegir institución</a></article>
+      <article class="card"><span class="tag serv">Servicio</span><h3>Asesorías personalizadas</h3><p>Refuerzo individual o en grupos pequeños, según tu nivel.</p><a class="mas" href="#contacto">Consultar</a></article>
+      <article class="card"><span class="tag">Producto</span><h3>Material y prácticas</h3><p>Guías, prácticas y simulacros para estudiar a tu ritmo.</p><a class="mas" href="#contacto">Consultar</a></article>
+      <article class="card"><span class="tag serv">Servicio</span><h3>Apps y sistemas a medida</h3><p>Desarrollo de software para instituciones, negocios y proyectos.</p><a class="mas" href="#contacto">Cotizar</a></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APP DEL POSTULANTE ============ -->
+<section class="alt app" id="app">
+  <div class="wrap">
+    <div>
+      <h2>App del Postulante</h2>
+      <p>La app para practicar antes de tu examen de ingreso, creada por un docente que conoce lo que se evalúa.</p>
+      <!-- EDITA estas 4 funciones según lo que hace tu app -->
+      <ul class="lista">
+        <li><strong>Preguntas por materia.</strong> Practica Matemática, Física y Química por temas.</li>
+        <li><strong>Simulacros con tiempo.</strong> Entrena como en el examen real.</li>
+        <li><strong>Respuestas explicadas.</strong> Aprende de cada error.</li>
+        <li><strong>Tu avance.</strong> Mira en qué temas mejoras y en cuáles debes reforzar.</li>
+      </ul>
+      <div class="botones">
+        <a class="btn" href="https://play.google.com/store/apps/details?id=TU_ID" target="_blank" rel="noopener">Descargar en Google Play</a>
+        <a class="btn claro" href="TU_ENLACE_APK_O_APP_STORE" target="_blank" rel="noopener">Otra forma de descarga</a>
+      </div>
+    </div>
+    <div class="capturas">
+      <div class="img">Captura 2<img src="imagenes/captura2.png" alt="Captura 2 de la app" onerror="this.style.display='none'"></div>
+      <div class="img">Captura 3<img src="imagenes/captura3.png" alt="Captura 3 de la app" onerror="this.style.display='none'"></div>
+      <div class="img">Captura 4<img src="imagenes/captura4.png" alt="Captura 4 de la app" onerror="this.style.display='none'"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MATERIAS ============ -->
+<section id="materias">
+  <div class="wrap">
+    <h2>Materias que enseño</h2>
+    <p class="intro">Los temas que más se evalúan en los exámenes de ingreso.</p>
+    <div class="grid g3">
+      <article class="card materia" style="--c:var(--mat)"><h3>Matemática</h3><ul><li>Álgebra y ecuaciones</li><li>Aritmética y razones</li><li>Geometría y trigonometría</li></ul></article>
+      <article class="card materia" style="--c:var(--fis)"><h3>Física</h3><ul><li>Cinemática y dinámica</li><li>Trabajo y energía</li><li>Electricidad básica</li></ul></article>
+      <article class="card materia" style="--c:var(--qui)"><h3>Química</h3><ul><li>Estructura atómica</li><li>Nomenclatura y reacciones</li><li>Estequiometría</li></ul></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTITUCIONES ============ -->
+<section class="alt" id="instituciones">
+  <div class="wrap">
+    <h2>Preparación por institución</h2>
+    <p class="intro">Cada examen tiene su estilo. Elige el tuyo y te oriento con lo que necesitas.</p>
+    <div class="grid g4">
+      <article class="card inst"><h3>ESFM</h3><p>Escuelas Superiores de Formación de Maestros.</p><a class="mas" href="#contacto">Consultar</a></article>
+      <article class="card inst"><h3>UMSS</h3><p>Universidad Mayor de San Simón.</p><a class="mas" href="#contacto">Consultar</a></article>
+      <article class="card inst"><h3>ANAPOL</h3><p>Academia Nacional de Policías.</p><a class="mas" href="#contacto">Consultar</a></article>
+      <article class="card inst"><h3>COLMIL</h3><p>Colegio Militar.</p><a class="mas" href="#contacto">Consultar</a></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOBRE MÍ ============ -->
+<section class="sobre" id="sobre">
+  <div class="wrap">
+    <!-- IMAGEN: tu foto (imagenes/foto.jpg) -->
+    <div class="img foto">Tu foto<img src="imagenes/foto.jpg" alt="Foto del profesor" onerror="this.style.display='none'"></div>
+    <div>
+      <h2>Hola, soy Sergio Daniel</h2>
+      <p>Ingeniero de sistemas y profesor de Matemática, Física y Química. Uno mi experiencia en el aula con el desarrollo de software para que estudiar sea más claro y práctico. Aquí puedes agregar tus años de experiencia, dónde has enseñado y tus logros con alumnos.</p>
+      <div class="enlaces">
+        <a href="https://www.facebook.com/TU_USUARIO" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.youtube.com/@TU_CANAL" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.tiktok.com/@TU_USUARIO" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://github.com/ssarmientocadima-ai" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PREGUNTAS FRECUENTES ============ -->
+<section class="alt">
+  <div class="wrap">
+    <h2>Preguntas frecuentes</h2>
+    <details><summary>¿La App del Postulante es gratis?</summary><p>dos horas de prueba gratuita y el costo mesnsual es de 40 bs .</p></details>
+    <details><summary>¿Para qué exámenes sirve?</summary><p>Ejemplo: ingreso a ESFM, UMSS, ANAPOL y COLMIL. Ajusta según tu contenido.</p></details>
+    <details><summary>¿Las clases son presenciales o virtuales?</summary><p>Indica tus modalidades, horarios y lugares.</p></details>
+    <details><summary>¿Cómo me inscribo y cómo pago?</summary><p>Escríbeme por WhatsApp o correo y te indico los pasos y métodos de pago.</p></details>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="contacto" id="contacto">
+  <div class="wrap">
+    <h2>¿Empezamos a prepararte?</h2>
+    <p>Escríbeme para consultar precios, horarios, la app o un sistema a medida.</p>
+    <div class="botones">
+      <a class="btn" href="https://wa.me/591TU_NUMERO" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      <a class="btn claro" href="mailto:sarmientocadima.prof@gmail.com">Enviar correo</a>
+      <a class="btn claro" href="https://forms.gle/TU_FORMULARIO" target="_blank" rel="noopener">Formulario de inscripción</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 TU_NOMBRE · <a href="URL_POLITICA_PRIVACIDAD">Política de privacidad</a>
+  <div>Visitas: <strong id="visitas">…</strong></div>
+</footer>
+
+<a class="wsp" href="https://wa.me/59171315093" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">WhatsApp</a>
+
+<script>
+/* CONTADOR DE VISITAS: cambia sergio Daniel por un nombre tuyo sin espacios (ej: prof-sarmiento-2026) */
+(function(){
+  var ruta="https://api.counterapi.dev/v1/TU_NOMBRE_UNICO/visitas/";
+  var ya=false;
+  try{ya=localStorage.getItem("visito")==="1";localStorage.setItem("visito","1");}catch(e){}
+  fetch(ruta+(ya?"":"up"))
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var n=(d.count!==undefined)?d.count:d.value;
+      document.getElementById("visitas").textContent=Number(n).toLocaleString("es-BO");
+    })
+    .catch(function(){document.getElementById("visitas").parentNode.style.display="none";});
+})();
+</script>
+
+</body>
+</html>
